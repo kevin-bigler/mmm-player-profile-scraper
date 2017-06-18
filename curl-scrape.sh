@@ -1,0 +1,1 @@
+curl -i -H "Content-Type: application/json" -X GET -d '{"nintendoId":"thek3vinator"}' http://localhost:3000/scrape

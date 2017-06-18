@@ -7,6 +7,10 @@ const util = {
 
 		const matches = nintendoId.match(/[\w\-\_\.]+/g);
 		return matches && matches.length && matches.length === 1;
+	},
+
+	getPlayerProfileUrl(nintendoId) {
+		return `https://supermariomakerbookmark.nintendo.net/profile/${nintendoId}?type=posted`;
 	}
 };
 
