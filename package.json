@@ -1,0 +1,15 @@
+{
+  "name": "player-profile-scraper",
+  "version": "1.0.0",
+  "description": "Scrapes player profiles from nintendo's website. Can be triggered to scrape on demand. Can also return any previously scraped profile data at any point in time.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kevin Bigler",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^1.1.3",
+    "express": "^4.15.3"
+  }
+}
