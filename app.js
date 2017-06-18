@@ -1,12 +1,14 @@
+'use strict';
+
 let express = require('express');
 let app = express();
 
 const chalk = require('chalk');
 
-// app.use(express.static('public'));
-console.log(chalk.green('Node Environment: ' + process.env.NODE_ENV));
+const NODE_ENV = process.env.NODE_ENV || 'development';
+console.log(chalk.green(`Node Environment: ${NODE_ENV}`));
 
-let cities = require('./routes/cities');
-app.use('/cities', cities);
+let route = require('./route');
+app.use('/', route);
 
 module.exports = app;	// do it this way, as a module, so that we can write tests using app
