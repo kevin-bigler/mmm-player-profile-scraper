@@ -20,7 +20,7 @@ router.get('/latest', nintendoIdValidator, (request, response) => {
 	// console.log(chalk.yellow(`nintendoId: ${nintendoId}`));
 
 	response.status(200);
-	response.json('All right');	// TODO player profile snapshot lookup, return
+	response.json({message: 'All right.', starCount: 100});	// TODO player profile snapshot lookup, return
 });
 
 module.exports = router;

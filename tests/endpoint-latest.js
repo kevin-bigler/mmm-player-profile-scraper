@@ -30,6 +30,15 @@ describe('Requests to the Get-Latest Path [GET /latest]', function() {
 
 	});
 
+	it('Returns starCount', function(done) {
+
+		request(app)
+			.get('/latest')
+			.send({nintendoId})
+			.expect(/starCount/i, done);
+			
+	});
+
 	describe('Returns a 400 Bad Request', function() {
 
 		it('when no nintendoId present', function(done) {
