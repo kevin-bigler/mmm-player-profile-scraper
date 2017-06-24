@@ -14,7 +14,7 @@ const nintendoIdValidator = (request, response, next) => {
 		response.status(400).json({error: 'nintendoId must be a string, e.g. joebob1990'});
 		return;
 	} else if ( ! util.playerNintendoIdIsValid(nintendoId) ) {
-		response.status(400).json({error: 'nintendoId is invalid. must only contain letters, numbers, underscores, dashes, and periods'});
+		response.status(400).json({error: 'nintendoId is invalid. must not be blank. must only contain letters, numbers, underscores, dashes, and periods'});
 	}
 
 	next();

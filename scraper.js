@@ -47,7 +47,9 @@ class Scraper {
 				return;
 			} else if ( response.statusCode !== 200) {
 				console.log(chalk.red('Response Status: ' + response.statusCode));
-				cb(new Error('Player Profile not found'));
+				const errorObject = new Error('Player Profile not found');
+				console.log('errorObject: ', errorObject);
+				cb('Player Profile not found');
 				return;
 			}
 
