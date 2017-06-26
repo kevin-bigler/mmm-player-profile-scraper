@@ -6,8 +6,8 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production node ./bin/www",
     "start-watch": "cross-env NODE_ENV=production nodemon ./bin/www",
-    "test": "cross-env NODE_ENV=test mocha tests/*.js",
-    "test-watch": "cross-env NODE_ENV=test mocha -w app/index.js tests/*.js"
+    "test": "cross-env NODE_ENV=test mocha tests/_index.js",
+    "test-watch": "cross-env NODE_ENV=test mocha -w app/index.js tests/_index.js"
   },
   "author": "Kevin Bigler",
   "license": "ISC",

@@ -48,7 +48,7 @@ class Scraper {
 			} else if ( response.statusCode !== 200) {
 				console.log(chalk.red('Response Status: ' + response.statusCode));
 				const errorObject = new Error('Player Profile not found');
-				console.log('errorObject: ', errorObject);
+				// console.log('errorObject: ', errorObject);
 				cb('Player Profile not found');
 				return;
 			}
@@ -58,6 +58,8 @@ class Scraper {
 			const playerProfileSnapshot = new PlayerProfileSnapshot();
 			playerProfileSnapshot.starCount = $('div.profile div.profile-info div.user-info div.name').text(); // TODO parse star count from the body
 			console.log('player profile snapshot: ', playerProfileSnapshot);
+
+			cb(null, playerProfileSnapshot);
 		});
 	}
 }

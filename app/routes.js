@@ -32,12 +32,12 @@ router.get('/scrape', nintendoIdValidator, (request, response) => {
 	// scrape this player, save in db, return player info if successful
 	const scraper = new Scraper();
 	scraper.scrapePlayerProfile(nintendoId, (error, playerProfileSnapshot) => {
-		console.log(chalk.yellow('scrapePlayerProfile() callback'));
+		// console.log(chalk.yellow('scrapePlayerProfile() callback'));
 		if (error) {
-			console.log('-error block');
+			// console.log('-error block');
 			response.status(404).json({error});
 		} else {
-			console.log('-ok block');
+			// console.log('-ok block');
 			response.status(200).json(playerProfileSnapshot);
 		}
 	});

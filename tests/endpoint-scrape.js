@@ -10,7 +10,7 @@ console.log();
 
 describe('Requests to the Scrape Path [GET /scrape]', function() {
 
-	const nintendoId = 'joe-cool.1980_Dude';
+	const nintendoId = 'thek3vinator';
 
 	it('Returns a 200 status code', function(done) {
 
