@@ -32,7 +32,7 @@ class Scraper {
 			// .pipe(process.stdout);
 		*/
 
-		request(playerProfileUrl, function (error, response, body) {
+		request(playerProfileUrl, (error, response, body) => {
 		  console.log('error:', error); // Print the error if one occurred
 		  console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
 		  console.log('body:', body && body.length); // Print the HTML for the Google homepage.
@@ -53,14 +53,18 @@ class Scraper {
 				return;
 			}
 
-			// TODO parse the response body here
-			const $ = cheerio.load(body);
-			const playerProfileSnapshot = new PlayerProfileSnapshot();
-			playerProfileSnapshot.starCount = $('div.profile div.profile-info div.user-info div.name').text(); // TODO parse star count from the body
-			console.log('player profile snapshot: ', playerProfileSnapshot);
-
-			cb(null, playerProfileSnapshot);
+			this.parsePlayerProfileSnapshot(body, cb);
 		});
+	}
+
+	parsePlayerProfileSnapshot(html, cb) {
+		// TODO parse each property here
+		const $ = cheerio.load(html);
+		const playerProfileSnapshot = new PlayerProfileSnapshot();
+		playerProfileSnapshot.starCount = $('div.profile div.profile-info div.user-info div.name').text(); // TODO parse star count from the body
+		console.log('player profile snapshot: ', playerProfileSnapshot);
+
+		cb(null, playerProfileSnapshot);
 	}
 }
 
