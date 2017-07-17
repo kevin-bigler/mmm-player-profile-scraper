@@ -69,7 +69,7 @@ class Scraper {
 
 		const playerProfileSnapshot = new PlayerProfileSnapshot();
 		playerProfileSnapshot.username = $('div.profile div.profile-info div.user-info div.name').text();
-		playerProfileSnapshot.starCount = 72;
+		playerProfileSnapshot.starCount = +this.scrapeHelper.parseTypographyNumber($('.profile-two-column-wrapper .liked-count .star > .liked-count'));
 
 		// console.log('player profile snapshot: ', playerProfileSnapshot);
 
