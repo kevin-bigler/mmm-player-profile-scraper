@@ -2,10 +2,16 @@ const request = require('request');
 const cheerio = require('cheerio');
 const chalk = require('chalk');
 
+const ScrapeHelper = require('./helper/scrape-helper');
+
 const util = require('./util');
 const PlayerProfileSnapshot = require('./model/player-profile-snapshot');
 
 class Scraper {
+	constructor() {
+		this.scrapeHelper = new ScrapeHelper();
+	}
+
 	scrapePlayerProfile(nintendoId, cb) {
 		const playerProfileUrl = util.getPlayerProfileUrl(nintendoId);
 		console.log('Getting player profile info from URL: ' + chalk.blue(playerProfileUrl));
@@ -60,9 +66,12 @@ class Scraper {
 	parsePlayerProfileSnapshot(html, cb) {
 		// TODO parse each property here
 		const $ = cheerio.load(html);
+
 		const playerProfileSnapshot = new PlayerProfileSnapshot();
-		playerProfileSnapshot.starCount = $('div.profile div.profile-info div.user-info div.name').text(); // TODO parse star count from the body
-		console.log('player profile snapshot: ', playerProfileSnapshot);
+		playerProfileSnapshot.username = $('div.profile div.profile-info div.user-info div.name').text();
+		playerProfileSnapshot.starCount = 72;
+
+		// console.log('player profile snapshot: ', playerProfileSnapshot);
 
 		cb(null, playerProfileSnapshot);
 	}

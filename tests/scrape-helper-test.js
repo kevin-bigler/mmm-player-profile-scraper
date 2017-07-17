@@ -28,7 +28,7 @@ const createTestHtmlElement = (innerHtml, selector) => {
 
 describe('Scrape Helper', function(){
 
-	describe('Parses Numbers (::parseTypographyNumber())', function(){
+	describe('Parses Numbers [::parseTypographyNumber()]', function(){
 
 		const scrapeHelper = new ScrapeHelper();
 
@@ -105,7 +105,7 @@ describe('Scrape Helper', function(){
 
 	});
 
-	describe('Parses Gameskin (::parseGameskin())', function(){
+	describe('Parses Gameskin [::parseGameskin()]', function(){
 
 		const scrapeHelper = new ScrapeHelper();
 
