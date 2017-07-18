@@ -28,8 +28,9 @@ router.get('/scrape', nintendoIdValidator, (request, response) => {
 	// console.log('request body: ', request.body);
 
 	const {nintendoId} = request.body;
-	console.log(chalk.yellow(`nintendoId: ${nintendoId}`));
+	// console.log(chalk.yellow(`nintendoId: ${nintendoId}`));
 	// scrape this player, save in db, return player info if successful
+	// TODO save player profile snapshot in db
 	const scraper = new Scraper();
 	scraper.scrapePlayerProfile(nintendoId, (error, playerProfileSnapshot) => {
 		// console.log(chalk.yellow('scrapePlayerProfile() callback'));

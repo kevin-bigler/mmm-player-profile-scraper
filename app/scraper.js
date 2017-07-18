@@ -14,45 +14,23 @@ class Scraper {
 
 	scrapePlayerProfile(nintendoId, cb) {
 		const playerProfileUrl = util.getPlayerProfileUrl(nintendoId);
-		console.log('Getting player profile info from URL: ' + chalk.blue(playerProfileUrl));
-
-		/*
-		request
-			.get(playerProfileUrl)
-			.on('error', (error) => {
-				console.log(chalk.bgRed('request error: ' + error));
-				cb(error);
-			})
-			.on('response', (response) => {
-				console.log(chalk.green('Got response'));
-				console.log(chalk.green('response keys: '), Object.keys(response));
-				console.log(chalk.green(`statusCode: ${response.statusCode}`));
-				if (response.statusCode !== 200) {
-					cb(new Error("Player Profile not found"));
-					return;
-				}
-
-				const playerProfileSnapshot = new PlayerProfileSnapshot();
-				playerProfileSnapshot.starCount = 10; // TODO parse star count from response
-			});
-			// .pipe(process.stdout);
-		*/
+		// console.log('Getting player profile info from URL: ' + chalk.blue(playerProfileUrl));
 
 		request(playerProfileUrl, (error, response, body) => {
-		  console.log('error:', error); // Print the error if one occurred
-		  console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-		  console.log('body:', body && body.length); // Print the HTML for the Google homepage.
+		  // console.log('error:', error); // Print the error if one occurred
+		  // console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+		  // console.log('body:', body && body.length); // Print the HTML for the Google homepage.
 
 			if (error) {
-				console.log(chalk.bgRed('request error: ' + error));
+				// console.log(chalk.bgRed('request error: ' + error));
 				cb(error);
 				return;
 			} else if (!response) {
-				console.log(chalk.red('No response'));
+				// console.log(chalk.red('No response'));
 				cb(new Error('No response'));
 				return;
 			} else if ( response.statusCode !== 200) {
-				console.log(chalk.red('Response Status: ' + response.statusCode));
+				// console.log(chalk.red('Response Status: ' + response.statusCode));
 				const errorObject = new Error('Player Profile not found');
 				// console.log('errorObject: ', errorObject);
 				cb('Player Profile not found');
