@@ -7,6 +7,7 @@ const chalk = require('chalk');
 
 const nintendoIdValidator = require('./middleware/nintendo-id-validator');
 const Scraper = require('./scraper');
+const db = require('./db/db');
 
 const router = express.Router();
 
@@ -19,6 +20,7 @@ router.get('/latest', nintendoIdValidator, (request, response) => {
 	// console.log(chalk.yellow(`nintendoId: ${nintendoId}`));
 	// TODO look up this player in db
 	// -- if not found, 404
+	console.log('db:', db);
 
 	response.status(200);
 	response.json({message: 'All right.', starCount: 100});	// TODO return player profile snapshot
