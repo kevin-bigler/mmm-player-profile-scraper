@@ -1,4 +1,7 @@
 {
-	"starCount": 72,
-	"username": "Kevinator"
+	"stats": {
+		"starCount": 72
+	},
+	"username": "Kevinator",
+	"nintendoId": "thek3vinator"
 }

@@ -1,47 +1,50 @@
 const mongoose = require('mongoose');
+
+// require schemas
 const profileSnapshotSchemaJson = require('./schema/profile-snapshot');
 
 class DB {
   /*
-    Properties:
+    Member Variables:
       db
       ProfileSnapshot
   */
   constructor() {
-    console.log('class DB: constructor');
+    // initialize database connection & database models
+    this.initConnection();
+    this.initModels();
 
-    // init database connection
+    // this.saveProfileSnapshot({ name: 'Michael Scott', nintendoId: 'littlekidlover', snapshotDate: new Date() });
+  }
+
+  initConnection() {
     mongoose.connect('mongodb://localhost/mmm_player_profile_snapshots');
     const db = mongoose.connection;
-    this.db = db;
     db.on('error', console.error.bind(console, 'connection error:'));
     db.once('open', function() {
       console.log("we're connected!");
     });
 
-    // init database models
-    const profileSnapshotSchema = mongoose.Schema(profileSnapshotSchemaJson);
-    const ProfileSnapshot = mongoose.model('profile_snapshot', profileSnapshotSchema);
-    this.ProfileSnapshot = ProfileSnapshot;
-
-    this.saveProfileSnapshot({ name: 'Michael Scott', nintendoId: 'littlekidlover', snapshotDate: new Date() });
+    this.db = db;
   }
 
-  saveProfileSnapshot(snapshot) {
-    // TODO convert snapshot (PlayerProfileSnapshot) to our schema
-    const obj = {
-      name: snapshot.name,
-      nintendoId: snapshot.nintendoId,
-      snapshotDate: snapshot.snapshotDate,
-      savedDate: new Date()
-    };
+  initModels() {
+    const profileSnapshotSchema = mongoose.Schema(profileSnapshotSchemaJson);
+    const ProfileSnapshot = mongoose.model('profile_snapshot', profileSnapshotSchema);
+
+    this.ProfileSnapshot = ProfileSnapshot;
+  }
+
+  saveProfileSnapshot(snapshot, cb = null) {
+    // convert snapshot (PlayerProfileSnapshot) to our schema
+    snapshot.savedDate = new Date();
     const profile = new this.ProfileSnapshot(obj);
 
-    profile.save(function(error, profile) {
-    	if (error) return console.error(error);
+    profile.save(cb); // cb params: error, profile
+  }
 
-    	console.log('successfully saved ' + profile.name);
-    });
+  getLatestProfileSnapshot(nintendoId, cb) {
+    // TODO
   }
 }
 

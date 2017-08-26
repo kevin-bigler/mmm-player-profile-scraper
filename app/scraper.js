@@ -17,10 +17,7 @@ class Scraper {
 		// console.log('Getting player profile info from URL: ' + chalk.blue(playerProfileUrl));
 
 		request(playerProfileUrl, (error, response, body) => {
-		  // console.log('error:', error); // Print the error if one occurred
-		  // console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-		  // console.log('body:', body && body.length); // Print the HTML for the Google homepage.
-
+			// first, check error cases
 			if (error) {
 				// console.log(chalk.bgRed('request error: ' + error));
 				cb(error);
@@ -37,6 +34,7 @@ class Scraper {
 				return;
 			}
 
+			// go ahead with parsing if no errors occurred
 			this.parsePlayerProfileSnapshot(body, cb);
 		});
 	}
@@ -46,10 +44,14 @@ class Scraper {
 		const $ = cheerio.load(html);
 
 		const playerProfileSnapshot = new PlayerProfileSnapshot();
-		playerProfileSnapshot.username = $('div.profile div.profile-info div.user-info div.name').text();
-		playerProfileSnapshot.starCount = +this.scrapeHelper.parseTypographyNumber($('.profile-two-column-wrapper .liked-count .star > .liked-count'));
+		console.log('new PlayerProfileSnapshot with no values in constructor:', playerProfileSnapshot);
 
-		// console.log('player profile snapshot: ', playerProfileSnapshot);
+		playerProfileSnapshot.snapshotDate = new Date();
+		playerProfileSnapshot.nintendoId = $('#contents > div.sns-share-wrapper').attr('data-page-id');
+		playerProfileSnapshot.username = $('div.profile div.profile-info div.user-info div.name').text();
+		playerProfileSnapshot.stats.starCount = +this.scrapeHelper.parseTypographyNumber($('.profile-two-column-wrapper .liked-count .star > .liked-count'));
+
+		console.log('player profile snapshot after scraping: ', playerProfileSnapshot);
 
 		cb(null, playerProfileSnapshot);
 	}

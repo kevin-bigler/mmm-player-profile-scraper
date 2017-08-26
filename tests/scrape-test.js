@@ -42,6 +42,8 @@ describe('Scraper module', function() {
 			// test each property (equality) individually
 			// -- testSnapshot vs scrapeTestJson from resources/scrape-test.json
 			const keys = Object.keys(scrapeTestJson);
+			// TODO just change this to deepEquals (don't iterate over every property)
+			// TODO how to check snapshotDate is the right value? or just check that it's a Date instance?
 			for (let key of keys) {
 
 				it(`- ${key}`, function() {
