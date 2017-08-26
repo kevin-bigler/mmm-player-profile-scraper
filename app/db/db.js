@@ -22,7 +22,7 @@ class DB {
     const db = mongoose.connection;
     db.on('error', console.error.bind(console, 'connection error:'));
     db.once('open', function() {
-      console.log("we're connected!");
+      // console.log("we're connected!");
     });
 
     this.db = db;
@@ -38,7 +38,7 @@ class DB {
   saveProfileSnapshot(snapshot, cb = null) {
     // convert snapshot (PlayerProfileSnapshot) to our schema
     snapshot.savedDate = new Date();
-    const profile = new this.ProfileSnapshot(obj);
+    const profile = new this.ProfileSnapshot(snapshot);
 
     profile.save(cb); // cb params: error, profile
   }

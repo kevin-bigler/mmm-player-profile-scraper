@@ -44,13 +44,16 @@ describe('Scraper module', function() {
 			const keys = Object.keys(scrapeTestJson);
 			// TODO just change this to deepEquals (don't iterate over every property)
 			// TODO how to check snapshotDate is the right value? or just check that it's a Date instance?
-			for (let key of keys) {
-
-				it(`- ${key}`, function() {
-					assert.strictEqual(testSnapshot[key], scrapeTestJson[key]);
-				});
-
-			}
+			// for (let key of keys) {
+			//
+			// 	it(`- ${key}`, function() {
+			// 		assert.strictEqual(testSnapshot[key], scrapeTestJson[key]);
+			// 	});
+			//
+			// }
+			it('deep equals our expected result', function() {
+				expect(testSnapshot).to.deep.include(scrapeTestJson);
+			});
 
 		});
 

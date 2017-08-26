@@ -44,14 +44,14 @@ class Scraper {
 		const $ = cheerio.load(html);
 
 		const playerProfileSnapshot = new PlayerProfileSnapshot();
-		console.log('new PlayerProfileSnapshot with no values in constructor:', playerProfileSnapshot);
+		// console.log('new PlayerProfileSnapshot with no values in constructor:', playerProfileSnapshot);
 
 		playerProfileSnapshot.snapshotDate = new Date();
 		playerProfileSnapshot.nintendoId = $('#contents > div.sns-share-wrapper').attr('data-page-id');
 		playerProfileSnapshot.username = $('div.profile div.profile-info div.user-info div.name').text();
 		playerProfileSnapshot.stats.starCount = +this.scrapeHelper.parseTypographyNumber($('.profile-two-column-wrapper .liked-count .star > .liked-count'));
 
-		console.log('player profile snapshot after scraping: ', playerProfileSnapshot);
+		// console.log('player profile snapshot after scraping: ', playerProfileSnapshot);
 
 		cb(null, playerProfileSnapshot);
 	}
