@@ -35,12 +35,16 @@ router.get('/scrape', nintendoIdValidator, (request, response) => {
 	const scraper = new Scraper();
 	scraper.scrapePlayerProfile(nintendoId, (error, playerProfileSnapshot) => {
 		if (!error) {
-			// TODO save player profile snapshot in db
 			db.saveProfileSnapshot(playerProfileSnapshot, (error, savedSnapshot) => {
-				// TODO may want to return an error status if db failed to save?
-				// -- but still return the snapshot object, in addition to the error
+				if (!error) {
+					response.status(200).json(savedSnapshot);
+				} else {
+					response.status(500).json({
+						error: {message: 'Failed to save to db', cause: error},
+						profileSnapshot: playerProfileSnapshot
+					});
+				}
 			});
-			response.status(200).json(playerProfileSnapshot);
 		} else {
 			// TODO probably want to return different errors besides 404, based on what error occurred
 			response.status(404).json({error});

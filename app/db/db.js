@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+// TODO add unit tests for this class, mocking mongoose (?)
+
 // require schemas
 const profileSnapshotSchemaJson = require('./schema/profile-snapshot');
 
@@ -13,8 +15,6 @@ class DB {
     // initialize database connection & database models
     this.initConnection();
     this.initModels();
-
-    // this.saveProfileSnapshot({ name: 'Michael Scott', nintendoId: 'littlekidlover', snapshotDate: new Date() });
   }
 
   initConnection() {
@@ -22,7 +22,7 @@ class DB {
     const db = mongoose.connection;
     db.on('error', console.error.bind(console, 'connection error:'));
     db.once('open', function() {
-      // console.log("we're connected!");
+      // TODO may want to delay further execution until we successfully connect to db (get to this block)
     });
 
     this.db = db;
@@ -36,15 +36,19 @@ class DB {
   }
 
   saveProfileSnapshot(snapshot, cb = null) {
-    // convert snapshot (PlayerProfileSnapshot) to our schema
+    // convert snapshot (PlayerProfileSnapshot) to our schema (this.ProfileSnapshot)
     snapshot.savedDate = new Date();
     const profile = new this.ProfileSnapshot(snapshot);
 
-    profile.save(cb); // cb params: error, profile
+    profile.save(cb); // cb params: error, profileSnapshot
   }
 
   getLatestProfileSnapshot(nintendoId, cb) {
-    // TODO
+    this.ProfileSnapshot
+      .findOne()
+      .where('nintendoId').equals(nintendoId)
+      .sort('-snapshotDate')
+      .exec(cb);  // cb params: error, profileSnapshot
   }
 }
 
