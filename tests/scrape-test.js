@@ -15,7 +15,6 @@ describe('Scraper module', function() {
 	describe('Parse Player Snapshot [::parsePlayerProfileSnapshot()]', function() {
 
 		const scraper = new Scraper();
-		// const nintendoId = 'thek3vinator';
 		let testSnapshot = null;
 
 		before(function(done) {
@@ -28,8 +27,6 @@ describe('Scraper module', function() {
 					if (error) {
 						done(error);
 					}
-					// console.log('Snapshot: ', snapshot);
-					// console.log('scrapeTestJson: ', scrapeTestJson);
 					testSnapshot = snapshot;
 					done();
 				});
@@ -39,21 +36,13 @@ describe('Scraper module', function() {
 
 		describe('Has Correct Property Values', function(){
 
-			// test each property (equality) individually
-			// -- testSnapshot vs scrapeTestJson from resources/scrape-test.json
-			const keys = Object.keys(scrapeTestJson);
-			// TODO just change this to deepEquals (don't iterate over every property)
-			// TODO how to check snapshotDate is the right value? or just check that it's a Date instance?
-			// for (let key of keys) {
-			//
-			// 	it(`- ${key}`, function() {
-			// 		assert.strictEqual(testSnapshot[key], scrapeTestJson[key]);
-			// 	});
-			//
-			// }
-			it('deep equals our expected result', function() {
+			it('deep includes our expected result', function() {
 				expect(testSnapshot).to.deep.include(scrapeTestJson);
 			});
+
+			it('contains snapshotDate', function() {
+				expect(testSnapshot.snapshotDate).to.be.a('date');
+			})
 
 		});
 
